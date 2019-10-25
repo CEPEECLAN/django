@@ -3,3 +3,9 @@
 
 # Editor bullshit
 .vscode/
+
+# Python shit
+__pycache__/
+
+# Django collected static files
+/staticfiles/
