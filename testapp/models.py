@@ -1,3 +1,10 @@
 from django.db import models
 
-# Create your models here.
+
+class SteamUser(models.Model):
+    steamid = models.IntegerField()
+    personaname = models.TextField()
+    avatar_url = models.TextField()
+    stats = models.TextField()
+    achievements = models.TextField()
+

@@ -4,13 +4,29 @@
 {% block content %}
     <h1>S T A T S</h1>
 
-    <p>{{ message}}</p>
-    <div class="stats_container">
-        <pre id="stats"></pre>
-    </div>
+    <img src="{{ avatar }}">
+    <h2>{{ personaname }}</h2>
 
-    <script>
-        var csgo_stats = JSON.parse('{{ csgo_stats | escapejs }}');
-        document.getElementById("stats").innerHTML = JSON.stringify(csgo_stats, undefined, 2);
-    </script>
+    <table style="display: inline-block;">
+        <tr>
+            <th style="text-align: left">Stats</th>
+        </tr>
+        {% for key, value in stats.items %}
+        <tr>
+            <td>{{ key }}</td>
+            <td style="text-align: right">{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </table> 
+    <table style="float: right;">
+        <tr>
+            <th style="text-align: left">Achievements</th>
+        </tr>
+        {% for key, value in achievements.items %}
+        <tr>
+            <td>{{ key }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
 {% endblock %}

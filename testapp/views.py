@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-import testapp.steam as steam
+from testapp.steam import SteamRequestHelper, SteamJsonParser
 import json
 
 
@@ -13,22 +13,34 @@ def index(request):
 
 def stats(request):
     steamid = request.GET.get('steamid', '') # read steam id data from url, steamid=....
-    user_data_response = steam.request_csgo_user_stats(steamid)
-    message = ''
-
-    if user_data_response.status_code != 200:
+    if steamid == "":
         steamid = gabbe
-        user_data_response = steam.request_csgo_user_stats(steamid)
-        message = 'Failed to load that steamid, using GABBES INSTEAD!'
 
-    if user_data_response.status_code == 200: # OK!
-        json_string = json.dumps(user_data_response.json())
-        return render(request, 'testapp/stats.html', {'csgo_stats': json_string, 'message': message})
+    user_summary_response = SteamRequestHelper.request_steam_user_summary(steamid)
+    user_stats = SteamRequestHelper.request_csgo_user_stats(steamid)
+
+    if user_stats.status_code != 200:
+        response = HttpResponse(
+            content=user_stats.content,
+            status=user_stats.status_code,
+            content_type=user_stats.headers['Content-Type']
+        )
+        return response
+
+    if user_summary_response.status_code != 200:
+        response = HttpResponse(
+            content=user_summary_response.content,
+            status=user_summary_response.status_code,
+            content_type=user_summary_response.headers['Content-Type']
+        )
+        return response
+
+    parsed_user_summary = SteamJsonParser.parse_steam_user_summary(user_summary_response.json())
+    parsed_user_stats = SteamJsonParser.parse_csgo_user_stats(user_stats.json())
+
+    parsed_user_summary['stats'] = parsed_user_stats['stats']
+    parsed_user_summary['achievements'] = parsed_user_stats['achievements']
+
+    return render(request, 'testapp/stats.html', parsed_user_summary)
 
 
-    response = HttpResponse(
-        content=user_data_response.content,
-        status=user_data_response.status_code,
-        content_type=user_data_response.headers['Content-Type']
-    )
-    return response
