@@ -12,14 +12,19 @@ def index(request):
 
 
 def stats(request):
-    # steamid = request.GET.get('steamid', '') # read steam id data from url, steamid=....
-    steamid = gabbe
-
+    steamid = request.GET.get('steamid', '') # read steam id data from url, steamid=....
     user_data_response = steam.request_csgo_user_stats(steamid)
+    message = ''
+
+    if user_data_response.status_code != 200:
+        steamid = gabbe
+        user_data_response = steam.request_csgo_user_stats(steamid)
+        message = 'Failed to load that steamid, using GABBES INSTEAD!'
 
     if user_data_response.status_code == 200: # OK!
         json_string = json.dumps(user_data_response.json())
-        return render(request, 'testapp/stats.html', {'csgo_stats': json_string})
+        return render(request, 'testapp/stats.html', {'csgo_stats': json_string, 'message': message})
+
 
     response = HttpResponse(
         content=user_data_response.content,
