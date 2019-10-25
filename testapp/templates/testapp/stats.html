@@ -1,0 +1,15 @@
+{% extends 'testapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>S T A T S</h1>
+
+    <div class="stats_container">
+        <pre id="stats"></pre>
+    </div>
+
+    <script>
+        var csgo_stats = JSON.parse('{{ csgo_stats | escapejs }}');
+        document.getElementById("stats").innerHTML = JSON.stringify(csgo_stats, undefined, 2);
+    </script>
+{% endblock %}

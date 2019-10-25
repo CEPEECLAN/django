@@ -17,3 +17,11 @@ div.container {
     margin: auto;
     background-color: white;
 }
+
+div.stats_container {
+    padding-left: 300px;
+}
+
+#stats {
+    text-align: left;
+}

@@ -1,11 +1,9 @@
-{% load static %}
+{% extends 'testapp/base.html' %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'testapp/style.css' %}">
+{% block content %}
+    <h1>WELCOME TO THE THUNDERDOME BITCH</h1>
+    {% load static %}
+    <img src="{% static "testapp/cepee_logo.png" %}" alt="logo" class="big_logo">
+    <p>CSS like its 1999 brother</p>
+{% endblock %}
 
-<div class="center">
-    <div class="container">
-        <h1>WELCOME TO THE THUNDERDOME BITCH</h1>
-        <img src="{% static "testapp/cepee_logo.png" %}" alt="logo" class="big_logo">
-        <p>CSS like its 1999 brother</p>
-    </div>
-</div>
