@@ -7,26 +7,69 @@
     <img src="{{ avatar }}">
     <h2>{{ personaname }}</h2>
 
-    <table style="display: inline-block;">
-        <tr>
-            <th style="text-align: left">Stats</th>
-        </tr>
-        {% for key, value in stats.items %}
-        <tr>
-            <td>{{ key }}</td>
-            <td style="text-align: right">{{ value }}</td>
-        </tr>
-        {% endfor %}
-    </table> 
-    <table style="float: right;">
-        <tr>
-            <th style="text-align: left">Achievements</th>
-        </tr>
-        {% for key, value in achievements.items %}
-        <tr>
-            <td>{{ key }}</td>
-        </tr>
-        {% endfor %}
+    <table  cellpadding="50" class="stats_outer">
+        <td class="stats_outer">
+        <table>
+            <tr>
+                <th style="text-align: left"><u>Player stats</u></th>
+            </tr>
+            {% for key, value in player_stats.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td style="text-align: right;">{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </td>
+        <td class="stats_outer">
+        <table class="stats">
+            <tr>
+                <th style="text-align: left;"><u>Weapon stats</u></th>
+            </tr>
+            {% for key, value in weapon_stats.items %}
+            <tr>
+                <th style="text-align: left;">{{ key }}</th>
+                {% for sub_key, sub_value in value.items %}
+                <tr>
+                    <td>{{ sub_key }}</td>
+                    <td style="text-align: right;">{{ sub_value }}</td>
+                </tr>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            <tr>
+        </table>
+        </td>
+        <td class="stats_outer">
+        <table class="stats"> 
+            <tr>
+                <th style="text-align: left;"><u>Map stats</u></th>
+            </tr>
+            {% for key, value in map_stats.items %}
+            <tr>
+                <th style="text-align: left; padding-left: 10px;">{{ key }}</th>
+                {% for sub_key, sub_value in value.items %}
+                <tr>
+                    <td>{{ sub_key }}</td>
+                    <td style="text-align: right;">{{ sub_value }}</td>
+                </tr>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table> 
+        </td>
+        <td class="stats_outer">
+        <table>
+            <tr>
+                <th style="text-align: left;">Achievements</th>
+            </tr>
+            {% for key, value in achievements.items %}
+            <tr>
+                <td>{{ key }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </td>
     </table>
 
 {% endblock %}

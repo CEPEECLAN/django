@@ -38,7 +38,9 @@ def stats(request):
     parsed_user_summary = SteamJsonParser.parse_steam_user_summary(user_summary_response.json())
     parsed_user_stats = SteamJsonParser.parse_csgo_user_stats(user_stats.json())
 
-    parsed_user_summary['stats'] = parsed_user_stats['stats']
+    parsed_user_summary['player_stats'] = parsed_user_stats['stats']['player_stats']
+    parsed_user_summary['weapon_stats'] = parsed_user_stats['stats']['weapon_stats']
+    parsed_user_summary['map_stats'] = parsed_user_stats['stats']['map_stats']
     parsed_user_summary['achievements'] = parsed_user_stats['achievements']
 
     return render(request, 'testapp/stats.html', parsed_user_summary)

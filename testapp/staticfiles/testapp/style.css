@@ -13,7 +13,7 @@ div.center {
 }
 
 div.container {
-    width: 40%;
+    width: 60%;
     margin: auto;
     background-color: white;
 }
@@ -22,6 +22,25 @@ div.stats_container {
     padding-left: 300px;
 }
 
-#stats {
-    text-align: left;
+table.stats_outer {
+    vertical-align: top;
 }
+
+table.stats {
+}
+
+.stats_outer td {
+    vertical-align: top;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stats th {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.stats td {
+    padding-left: 20px;
+}
+
