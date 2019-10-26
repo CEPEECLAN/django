@@ -5,23 +5,27 @@ base_uri = "http://api.steampowered.com/"
 csgo_user_stats_sub_url = "ISteamUserStats/GetUserStatsForGame/v0002/?appid=730"
 steam_user_summary_sub_url = "ISteamUser/GetPlayerSummaries/v2/"
 
+player_stat_keys = {
+        'total_kills',
+        'total_deaths',
+        'total_mvps',
+        'total_matches_won',
+        'total_matches_played',
+        'total_shots_hit',
+        'total_shots_fired',
+        'total_kills_headshot',
+        'total_kills_enemy_weapon',
+        'total_kills_knife_fight',
+        'total_kills_enemy_blinded',
+        'total_kills_against_zoomed_sniper',
+        'overall_accuracy',
+}
+
 def process_stats(stats):
 
-    player_stats = {
-            'total_kills': stats['total_kills'],
-            'total_deaths': stats['total_deaths'],
-            'total_mvps': stats['total_mvps'],
-            'total_matches_won': stats['total_matches_won'],
-            'total_matches_played': stats['total_matches_played'],
-            'total_shots_hit': stats['total_shots_hit'],
-            'total_shots_fired': stats['total_shots_fired'],
-            'total_kills_headshot': stats['total_kills_headshot'],
-            'total_kills_enemy_weapon': stats['total_kills_enemy_weapon'],
-            'total_kills_knife_fight': stats['total_kills_knife_fight'],
-            'total_kills_enemy_blinded': stats['total_kills_enemy_blinded'],
-            'total_kills_against_zoomed_sniper': stats['total_kills_against_zoomed_sniper'],
-            'overall_accuracy': "{}%".format(round(stats['total_shots_hit'] / stats['total_shots_fired'] * 100)),
-    }
+    player_stats = { key: value for key, value in stats.items() if key in player_stat_keys }
+    if 'total_shots_hit' in player_stats and 'total_shots_fired' in player_stats:
+        player_stats['overall_accuracy'] = "{}%".format(round(stats['total_shots_hit'] / stats['total_shots_fired'] * 100))
 
     all_wep_stats  = {}
     all_map_stats = {}
