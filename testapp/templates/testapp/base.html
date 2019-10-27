@@ -1,9 +1,24 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'testapp/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'testapp/menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'testapp/stats.css' %}">
 
-<div class="center">
-    <div class="container">
-        {% block content %}
-        {% endblock %}
-    </div>
-</div>
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %}No title set{% endblock %}</title>
+
+        {% block headextra %}{% endblock %}
+    </head>
+
+    <body>
+        <div class="center">
+            {% include "testapp/menu.html" %}
+
+            <div class="container">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

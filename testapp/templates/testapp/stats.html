@@ -1,8 +1,19 @@
 {% extends 'testapp/base.html' %}
 {% load static %}
 
+{% block title %}
+CEPEE STATS
+{% endblock %}
+
 {% block content %}
+<div class="stats">
     <h1>S T A T S</h1>
+
+    <ul>
+        {% for key, value in steamids.items %}
+        <li><a href="{{ value }}">{{ key }}</a></li>
+        {% endfor %}
+    </ul>
 
     <img src="{{ avatar }}">
     <h2>{{ personaname }}</h2>
@@ -22,7 +33,7 @@
         </table>
         </td>
         <td class="stats_outer">
-        <table class="stats">
+        <table>
             <tr>
                 <th style="text-align: left;"><u>Weapon stats</u></th>
             </tr>
@@ -41,7 +52,7 @@
         </table>
         </td>
         <td class="stats_outer">
-        <table class="stats"> 
+        <table> 
             <tr>
                 <th style="text-align: left;"><u>Map stats</u></th>
             </tr>
@@ -71,5 +82,5 @@
         </table>
         </td>
     </table>
-
+</div>
 {% endblock %}

@@ -22,7 +22,6 @@ player_stat_keys = {
 }
 
 def process_stats(stats):
-
     player_stats = { key: value for key, value in stats.items() if key in player_stat_keys }
     if 'total_shots_hit' in player_stats and 'total_shots_fired' in player_stats:
         player_stats['overall_accuracy'] = "{}%".format(round(stats['total_shots_hit'] / stats['total_shots_fired'] * 100))
@@ -96,6 +95,8 @@ class SteamJsonParser:
 
         if 'response' in user_summary:
             if 'players' in user_summary['response']:
+                if len(user_summary['response']['players']) == 0:
+                    return parsed_user_summary
                 summary = user_summary['response']['players'][0]
                 parsed_user_summary['steamid'] = int(summary['steamid'])
                 parsed_user_summary['personaname'] = summary['personaname']
