@@ -7,6 +7,7 @@ import draw_chickens
 chicken_positions = list()
 last_tick = 0
 last_id = 0
+new_tick = False
 
 i = 0
 new_chicken = False
@@ -17,6 +18,7 @@ if not os.path.isfile("chickendict"):
         for line in data:
             if "tick: " in line:
                 last_tick = int(line.split(' ')[1])
+                new_tick = True
 
             if "Entity Delta update:" in line:
                 numbers = re.findall("\d+", line)
@@ -29,8 +31,12 @@ if not os.path.isfile("chickendict"):
             if new_chicken and i == new_chicken_i:
                 chicken_coords = re.findall("\d+\.\d+", line)
                 chicken_coords = [ float(v) for v in chicken_coords ]
-                if len(chicken_coords) > 0 and last_tick % 100 == 0:
-                    chicken_positions.append({ last_id: chicken_coords })
+                if len(chicken_coords) > 0:
+                    if new_tick:
+                        chicken_positions.append({})
+                        new_tick = False
+                    chicken_positions[-1][last_id] = chicken_coords
+                new_chicken = False
             i += 1
 
 
