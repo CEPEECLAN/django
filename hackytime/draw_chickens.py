@@ -3,8 +3,8 @@ from PIL import Image
 
 
 def convert_coords(coords):
-    offset = 1500
-    scale = 2
+    offset = 0
+    scale = 0.25
     return [ int((v + offset) / scale) for v in coords ]
 
 

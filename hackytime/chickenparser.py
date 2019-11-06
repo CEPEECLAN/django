@@ -46,7 +46,4 @@ else:
     with open("chickendict") as f:
         chicken_positions = json.load(f)
 
-
-print(len(chicken_positions))
 draw_chickens.make_gif(chicken_positions)
-
