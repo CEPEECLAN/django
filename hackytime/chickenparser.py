@@ -29,7 +29,7 @@ if not os.path.isfile("chickendict"):
             if new_chicken and i == new_chicken_i:
                 chicken_coords = re.findall("\d+\.\d+", line)
                 chicken_coords = [ float(v) for v in chicken_coords ]
-                if len(chicken_coords) > 0:
+                if len(chicken_coords) > 0 and last_tick % 100 == 0:
                     chicken_positions.append({ last_id: chicken_coords })
             i += 1
 
@@ -41,5 +41,6 @@ else:
         chicken_positions = json.load(f)
 
 
+print(len(chicken_positions))
 draw_chickens.make_gif(chicken_positions)
 
