@@ -2,6 +2,13 @@ import random
 from PIL import Image
 
 
+def convert_coords(coords):
+    offset = 1500
+    scale = 2
+
+    return [ int((v + offset) / scale) for v in coords ]
+
+
 def make_gif(chicken_frames):
     chicken = Image.open('chicken.png', 'r')
     background = Image.open('de_inferno_radar.png', 'r')
@@ -10,6 +17,7 @@ def make_gif(chicken_frames):
     for frame in chicken_frames:
         new_background = background.copy()
         for _, chicken_coords in frame.items():
+            chicken_coords = convert_coords(chicken_coords)
             new_background.paste(chicken, chicken_coords[:2], chicken)
         frames.append(new_background)
 
