@@ -2,7 +2,7 @@ div.stats {
     margin: auto;
     padding: 2px;
     border-style: solid;
-    border-width: 0px 0px 1px 0px;
+    border-width: 0px 0px 0px 0px;
 }
 
 .stats h1 {
@@ -15,7 +15,12 @@ div.stats {
     padding: 10px;
 }
 
-.stats table{
+.stats_outer table {
+    width: 100% !important;
+    cellpadding: 20;
+}
+
+.stats table {
 }
 
 .stats_outer td {

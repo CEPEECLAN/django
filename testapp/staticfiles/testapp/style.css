@@ -1,16 +1,29 @@
 
+body {
+    margin: 0;
+    padding: 0;
+}
 
 div.center {
-    margin: auto;
+    margin: 0;
+    padding: 0;
     text-align: center;
-    background-color: white;
+    background-color: black;
+    background-image: url("background2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
     width: 100%;
 }
 
+
 div.container {
-    width: 60%;
+    width: 50%;
     margin: auto;
-    background-color: white;
+    background-color: #383c4a;
+    min-height: 100vh;
 }
 
 div.stats_container {
